@@ -81,7 +81,7 @@ func Insertar(w http.ResponseWriter, r *http.Request) {
 			panic(err.Error())
 		}
 		insertarRegistros.Exec(nombre, correo)
-		http.Redirect(w, r, "/", 301)
+		http.Redirect(w, r, "/", http.StatusMovedPermanently)
 	}
 }
 
@@ -125,7 +125,7 @@ func Actualizar(w http.ResponseWriter, r *http.Request) {
 		}
 
 		modificarRegistros.Exec(nombre, correo, id)
-		http.Redirect(w, r, "/", 301)
+		http.Redirect(w, r, "/", http.StatusMovedPermanently)
 	}
 }
 
@@ -138,7 +138,7 @@ func Borrar(w http.ResponseWriter, r *http.Request) {
 		panic(err.Error())
 	}
 	borrarRegistro.Exec(idEmpleado)
-	http.Redirect(w, r, "/", 301)
+	http.Redirect(w, r, "/", http.StatusMovedPermanently)
 }
 
 func main() {
