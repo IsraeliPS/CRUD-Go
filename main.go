@@ -80,6 +80,7 @@ func Insertar(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			panic(err.Error())
 		}
+
 		insertarRegistros.Exec(nombre, correo)
 		http.Redirect(w, r, "/", http.StatusMovedPermanently)
 	}
@@ -137,6 +138,7 @@ func Borrar(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err.Error())
 	}
+
 	borrarRegistro.Exec(idEmpleado)
 	http.Redirect(w, r, "/", http.StatusMovedPermanently)
 }
