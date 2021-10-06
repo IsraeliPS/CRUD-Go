@@ -11,6 +11,14 @@ import (
 	"github.com/gorilla/mux"
 )
 
+var plantillas = template.Must(template.ParseGlob("plantillas/*"))
+
+type Empleados struct {
+	Id     int
+	Nombre string
+	Correo string
+}
+
 func conexionDB() (conexion *sql.DB) {
 	Driver := "mysql"
 	Usuario := "root"
@@ -24,14 +32,6 @@ func conexionDB() (conexion *sql.DB) {
 
 	return conexion
 }
-
-type Empleados struct {
-	Id     int
-	Nombre string
-	Correo string
-}
-
-var plantillas = template.Must(template.ParseGlob("plantillas/*"))
 
 func Inicio(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("iniciando la API")
@@ -62,8 +62,6 @@ func Inicio(w http.ResponseWriter, r *http.Request) {
 
 		arregloEmpleado = append(arregloEmpleado, empleado)
 	}
-	// fmt.Println(arregloEmpleado)
-
 	plantillas.ExecuteTemplate(w, "inicio", arregloEmpleado)
 }
 
@@ -110,8 +108,6 @@ func Editar(w http.ResponseWriter, r *http.Request) {
 		empleado.Nombre = nombre
 		empleado.Correo = correo
 	}
-
-	fmt.Println(empleado)
 	plantillas.ExecuteTemplate(w, "editar", empleado)
 }
 
